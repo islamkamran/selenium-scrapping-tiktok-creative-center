@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
 import csv
+from cleaning_links import clean_links
+from authentic_brand_filter import authentic_brands
 
 print("******Opening Chrome**********")
 # Making options for how to open chrome in which mode
@@ -23,7 +25,7 @@ print("******Proxy Website**********")
 driver.get("https://plainproxies.com/resources/free-web-proxy/")
 
 # the URL for our intended data
-creative_center_url = "https://ads.tiktok.com/business/creativecenter/inspiration/topads/mobile/en?period=30&region=US&industry=27"
+creative_center_url = "https://ads.tiktok.com/business/creativecenter/inspiration/topads/mobile/en?period=30&region=US&secondIndustry=16105000000"
 
 
 print("******Open Creative Center**********")
@@ -81,31 +83,41 @@ with open('dummy.csv', 'a', newline='') as csvfile:
         for element in elements:
             # print(element.text)
             values.append(element.text)
-            # if element.text != "":
-            #     values.append(element.text)
-            # else:
-            #     values.append(None)
-        # values = [element.text for element in elements]
+
         print(len(values))
         print(values)
+        # we remove the extra part after (.com) as we do not need the link for the specific brand we need link for the website
+        values = clean_links(values)
+        copy_values = values.copy()
+        # As we removed the extra part now check if the middle part of the link matches with the name of the brand if yes add it it is an authentic brand else discard it
+        simalirity = authentic_brands(copy_values)
+        print(values)
+        print(simalirity)
 
-        if len(values) == 4:
-            writer.writerow([values[0], values[1], values[2]])
-            print(f"******Data added for: {link}**********")
-        elif len(values) == 5:
-            writer.writerow([values[0], values[2], values[3]])
-            print(f"******Data added for: {link}**********")
-        elif len(values) == 6:
-            writer.writerow([values[1], values[3], values[4]])
-            print(f"******Data added for: {link}**********")
+        if simalirity >= 0.5:
+            if len(values) == 4:
+                if values[1] == "-" or values[2] == "-":
+                    pass
+                else:
+                    writer.writerow([values[0], values[1], values[2]])
+                    print(f"******Data added for: {link}**********")
+            elif len(values) == 5:
+                if values[2] == "-" or values[3] == "-":
+                    pass
+                else:
+                    writer.writerow([values[0], values[2], values[3]])
+                    print(f"******Data added for: {link}**********")
+            elif len(values) == 6:
+                if values[3] == "-" or values[4] == "-":
+                    pass
+                else:
+                    writer.writerow([values[1], values[3], values[4]])
+                    print(f"******Data added for: {link}**********")
+            else:
+                pass
         else:
-            pass
+            print("Not An authentic brand")
 
-        # if len(values) == 4:
-        #     writer.writerow([values[0], values[1], values[2], values[3]])
-        #     print(f"******Data added for: {link}**********")
-        # else:
-        #     print("Data is less then 4")
 
 print("******Scrapping Completed for new brands**********")
 time.sleep(3)
