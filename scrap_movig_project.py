@@ -23,7 +23,7 @@ print("******Proxy Website**********")
 driver.get("https://plainproxies.com/resources/free-web-proxy/")
 
 # the URL for our intended data
-creative_center_url = "https://ads.tiktok.com/business/creativecenter/inspiration/topads/mobile/en?period=30&region=US&industry=30"
+creative_center_url = "https://ads.tiktok.com/business/creativecenter/inspiration/topads/mobile/en?period=30&region=US&industry=27"
 
 
 print("******Open Creative Center**********")

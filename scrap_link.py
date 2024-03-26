@@ -13,7 +13,7 @@ chrome_options.add_argument("--disable-notifications")
 driver = webdriver.Chrome(options=chrome_options)
 driver.maximize_window()
 
-driver.get("https://ads.tiktok.com/business/creativecenter/inspiration/topads/pc/en?period=30&region=PK&industry=22")
+driver.get("https://ads.tiktok.com/business/creativecenter/inspiration/topads/pc/en?period=30&region=PK&industry=10")
 time.sleep(5)
 driver.find_element(By.CLASS_NAME, "FixedHeaderPc_loginBtn__lL73Y").click()
 time.sleep(3)
