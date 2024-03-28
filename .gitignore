@@ -1,2 +1,3 @@
 /venv/
-/dummy.csv
+tiktok_data.csv
+.env.dev

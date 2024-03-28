@@ -1,15 +1,3 @@
-# Cleaning the Links Removing the Extra part
-# def clean_links(values):
-#     if len(values) == 4:
-#         values[2] = values[2].split(".com")[0] + ".com/"
-#     elif len(values) == 5:
-#         values[3] = values[3].split(".com")[0] + ".com/"
-#     elif len(values) == 6:
-#         values[4] = values[4].split(".com")[0] + ".com/"
-
-#     return values
-
-
 def clean_links(values):
     if len(values) == 4:
         if ".com" in values[2]:
