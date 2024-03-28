@@ -1,6 +1,5 @@
 import Levenshtein
 
-
 def authentic_brands(copy_values):
     if len(copy_values) == 4:
         if ".com" in copy_values[2] or ".co" in copy_values[2]:
