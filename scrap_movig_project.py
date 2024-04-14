@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
-import csv
+import csv  
 from cleaning_links import clean_links
 from authentic_brand_filter import authentic_brands
 
